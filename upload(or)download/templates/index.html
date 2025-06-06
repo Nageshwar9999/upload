@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #6C93B9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .auth-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .card {
+            width: 350px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background-color: #E91E63;
+            border: none;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            background-color: #D81B60;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-container">
+        <!-- Signup Form -->
+        <div class="card">
+            <h4 class="text-center">SIGN UP</h4>
+            <form method="POST">
+                <input type="hidden" name="action" value="signup">
+                <div class="form-group">
+                    <label>Key</label>
+                    <input type="text" class="form-control" name="key" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" class="form-control" name="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">SIGN UP</button>
+            </form>
+        </div>
+
+        <!-- Login Form -->
+        <div class="card">
+            <h4 class="text-center">LOGIN</h4>
+            <form method="POST" action="{{ url_for('index') }}">
+                <input type="hidden" name="action" value="login">
+                <div class="form-group">
+                    <label>Key</label>
+                    <input type="text" class="form-control" name="key" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-success btn-block">LOGIN</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Flash Messages -->
+    <div class="container mt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} mt-2">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+</body>
+
+</html>
